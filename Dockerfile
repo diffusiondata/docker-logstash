@@ -1,12 +1,12 @@
 # Download and install logstash, and insert our custom modules
 
-FROM debian:jessie
+FROM debian:jessie-backports
 MAINTAINER Push Technology "cloudops@pushtechnology.com"
 
 # Install Deps and Download logstash
-RUN apt-get update && apt-get install -y wget openjdk-7-jre m4
-RUN wget https://download.elastic.co/logstash/logstash/logstash-1.5.4.tar.gz -O /tmp/logstash.tar.gz 2> /dev/null
+RUN apt-get update && apt-get install -y wget openjdk-8-jre m4 && apt-get remove openjdk-6-jre
+RUN wget https://artifacts.elastic.co/downloats/logstash/logstash-5.5.2.tar.gz -O /tmp/logstash.tar.gz 2> /dev/null
 
 # Unzip logstash and put in place
-RUN tar zxf /tmp/logstash.tar.gz -C /opt && mv /opt/logstash-1.5.4 /opt/logstash && rm -rf /tmp/logstash.tar.gz
+RUN tar zxf /tmp/logstash.tar.gz -C /opt && mv /opt/logstash-5.5.2 /opt/logstash && rm -rf /tmp/logstash.tar.gz
 
